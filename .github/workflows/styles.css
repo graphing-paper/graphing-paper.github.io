@@ -1,0 +1,32 @@
+#image {
+  max-width: 10%;
+  max-height: auto;
+  display: block;
+
+}
+* {
+  background-color: tan;
+}
+#img-div {
+  background-color: green;
+
+}
+#tribute-link {
+  color: red;
+}
+#tribute-link:hover {
+  color: #ffffff;
+}
+#image:hover {
+  max-width: 100%;
+  max-height: auto;
+}
+#secondimg {
+  max-width: 30%;
+  max-height: auto;
+  margin: 0;
+}
+#this {
+  padding: 0;
+  margin: 0;
+}
