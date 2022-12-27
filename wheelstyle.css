@@ -1,5 +1,6 @@
 * {
-  background-color: #2e3329;
+  background-color: #black;
+  color: white;
 }
 
 @keyframes imgan {
@@ -12,8 +13,8 @@
 }
 
 #wheel1 {
-width: 50%;
-height: 50%;
+width: 20%;
+height: 20%;
 animation-name: imgan;
 animation-duration: 30s;
 animation-timing-function: linear;
