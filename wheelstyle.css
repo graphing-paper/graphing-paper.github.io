@@ -1,24 +1,24 @@
-* {
-  background-color: #black;
-  color: white;
+body {
+background-color: #cccccc;
+display: inline-block;
+
 }
 
-@keyframes imgan {
+
+#wheel {
+width: 90%;
+padding-top: 10%;
+animation: wheel 10s infinite;
+animation-timing-function: linear;
+
+
+}
+
+@keyframes wheel {
    0% {
      transform: rotate(0deg);
    }
    100% {
      transform: rotate(360deg);
    }
-}
-
-#wheel1 {
-width: 20%;
-height: 20%;
-animation-name: imgan;
-animation-duration: 30s;
-animation-timing-function: linear;
-display: block;
-animation-iteration-count: infinite;
-padding: 20%;
 }
