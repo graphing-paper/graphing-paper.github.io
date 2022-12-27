@@ -19,4 +19,5 @@ animation-duration: 30s;
 animation-timing-function: linear;
 display: block;
 animation-iteration-count: infinite;
+  padding: 20%;
 }
