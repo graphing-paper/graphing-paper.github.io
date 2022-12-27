@@ -6,8 +6,30 @@
     <link rel="stylesheet" href="wheelstyle.css">
     <style>
       * {
-      color: #ffffff;
-      }
+  background-color: #2e3329;
+}
+
+
+#wheel1 {
+width: 50%;
+height: 50%;
+animation-name: imgan;
+animation-duration: 30s;
+animation-timing-function: linear;
+display: block;
+animation-iteration-count: infinite;
+  padding: 20%;
+}
+
+
+@keyframes imgan {
+   0% {
+     transform: rotate(0deg);
+   }
+   100% {
+     transform: rotate(360deg);
+   }
+}
     </style>
   </head>
   <body>
