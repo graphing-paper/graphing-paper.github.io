@@ -6,7 +6,7 @@
   animation-duration: 10s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-  transform origin: center center;
+  transform-origin: center center;
 }
 
 @keyframes wheel {
