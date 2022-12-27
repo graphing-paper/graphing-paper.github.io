@@ -2,6 +2,14 @@
   background-color: #2e3329;
 }
 
+@keyframes imgan {
+   0% {
+     transform: rotate(0deg);
+   }
+   100% {
+     transform: rotate(360deg);
+   }
+}
 
 #wheel1 {
 width: 50%;
@@ -11,16 +19,5 @@ animation-duration: 30s;
 animation-timing-function: linear;
 display: block;
 animation-iteration-count: infinite;
-  padding: 20%;
- position: relative;
-}
-
-
-@keyframes imgan {
-   0% {
-     transform: rotate(0deg);
-   }
-   100% {
-     transform: rotate(360deg);
-   }
+padding: 20%;
 }
