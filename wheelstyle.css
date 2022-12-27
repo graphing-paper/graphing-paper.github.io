@@ -12,6 +12,7 @@ animation-timing-function: linear;
 display: block;
 animation-iteration-count: infinite;
   padding: 20%;
+ position: relative;
 }
 
 
