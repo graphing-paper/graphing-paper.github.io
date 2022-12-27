@@ -30,3 +30,8 @@
   padding: 0;
   margin: 0;
 }
+#secret-style {
+  font-family: fantasy;
+  background-color: black;
+  color: white;
+}
