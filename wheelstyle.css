@@ -1,26 +1,15 @@
 * {
   background-color: black;
 }
-#wheel1 {
-  animation-name: wheel;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  
+
+@keyframes imgan {
 }
 
-
-
-@keyframes #wheel1 {
-   0% {
-     transform: rotate(0deg);
-   }
-   100% {
-     transform: rotate(360deg);
-   }
+img {
+width: 50%;
+height: 50%;
+animation-name: imgan;
+animation-duration: 30s;
+animation-timing-function: linear;
+display: block;
 }
-#wheel1 {
-  width: 60%;
-}
-
-
