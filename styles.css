@@ -37,4 +37,5 @@
 }
 #bird {
   display: inline; 
+  boarder: 20px dotted #ffffff;
 }
