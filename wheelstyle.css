@@ -1,7 +1,7 @@
 * {
   background-color: black;
 }
-.wheel {
+#wheel1 {
   animation-name: wheel;
   animation-duration: 10s;
   animation-iteration-count: infinite;
@@ -9,7 +9,9 @@
   
 }
 
-@keyframes wheel1 {
+
+
+@keyframes #wheel1 {
    0% {
      transform: rotate(0deg);
    }
@@ -18,7 +20,7 @@
    }
 }
 #wheel1 {
-  width: 40%;
-
+  width: 60%;
 }
+
 
