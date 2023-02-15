@@ -5,27 +5,30 @@ body {
 }
 
 #joe {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 200px;
-  height: 200px;
+  height: 30%;
   background-image: url(joe.png);
   background-size: contain;
   background-repeat: no-repeat;
 }
 
 #menu {
-  position: absolute;
+  position: fixed;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
+  background-color: green;
 }
 
 .item {
   margin: 10px;
   cursor: pointer;
+  width: 5%;
+  height: 5%;
 }
 
 #message {
