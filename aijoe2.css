@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+#joe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background-image: url(joe.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#menu {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.item {
+  margin: 10px;
+  cursor: pointer;
+}
+
+#message {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: cursive;
+  color: red;
+  display: none;
+}
