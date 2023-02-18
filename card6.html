@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phrase Generator</title>
+    <style> body {
+    font-family: "Times New Roman", Times, serif;
+    background-color: #131642;
+    margin: 0;
+color: #FFFFFF;
+}
+
+header {
+    background-color: black;
+    color: #FFFFFF;
+    padding: 10px;
+}
+
+header a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+select {
+    margin-right: 10px;
+}
+
+button {
+    background-color: black;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #007FFF;
+}
+
+#phrase-container {
+    margin-top: 20px;
+}
+
+.phrase {
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+p {
+font-size: 0.875em;
+color: red;
+}
+ </style>
+</head>
+<body>
+    <header>
+        <a href="index.html">Home</a>
+    </header>
+    <div class="container">
+        <h1>Phrase Generator</h1>
+        <label for="num-phrases">Number of Phrases:</label>
+        <select id="num-phrases">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            
+        </select>
+        <button id="generate">Generate Phrases</button>
+        <div id="phrase-container">
+        </div>
+    </div>
+<div>
+	<div>
+<p>	3 card: </p>
+<p>		past	     situation      mind</p>
+<p>		present	     obstacle       body</p>
+<p>		future	     advice         spirit</p>
+<p>	5 card:
+<p>		past					present situation</p>
+<p>		present					influences</p>
+<p>		future					challenges</p>
+<p>		core reason for circumstances		final outcome</p>
+<p>		potential of situation			theme</p>
+<p>	6 card: 
+<p>		how you feel now</p>
+<p>		what you want most now</p>
+<p>		fears</p>
+<p>		going for you</p>
+<p>		going against you</p>
+<p>		outcome </p>
+	</div>
+</div>
+    <footer>
+        <p>in progress, still not working perfectly - this page was created with heavy help from chatgpt </p>
+    </footer>
+    <script> const typeAPhrases = [
+  "Magician",
+"High Priestess",
+"Empress",
+"Emperor",
+"Hierophant",
+"Lovers",
+"Chariot",
+"Strength",
+"Hermit",
+"Wheel of Fortune",
+"Justice",
+"Hanged Man",
+"Death",
+"Temperance",
+"Devil",
+"Tower",
+"Star",
+"Moon",
+"Sun",
+"Judgement",
+"World"
+
+];
+
+const typeBPartOne = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "King", "Queen", "Knight", "Page"];
+
+const typeBPartTwo = ["Swords", "Batons", "Coins", "Cups"];
+
+const phraseContainer = document.getElementById("phrase-container");
+const generateButton = document.getElementById("generate");
+const numPhrasesSelect = document.getElementById("num-phrases");
+
+generateButton.addEventListener("click", () => {
+  phraseContainer.innerHTML = "";
+  const numPhrases = parseInt(numPhrasesSelect.value);
+if (isNaN(numPhrases)) {return; }
+  const typeAPhrasesCopy = typeAPhrases.slice();
+if (isNaN(numPhrases)) {
+    // handle the error
+    return;
+  }
+  const typeBPartOneCopy = typeBPartOne.slice();
+if (isNaN(numPhrases)) {
+    // handle the error
+    return;
+  }
+  const typeBPartTwoCopy = typeBPartTwo.slice();
+if (isNaN(numPhrases)) {
+    // handle the error
+    return;
+  }
+
+  for (let i = 0; i < numPhrases; i++) {
+    let phrase;
+    if (Math.random() < 0.5 || typeAPhrasesCopy.length === 0) {
+      const partOne =
+        typeBPartOneCopy.splice(Math.floor(Math.random() * typeBPartOneCopy.length), 1)[0];
+      const partTwo =
+        typeBPartTwoCopy.splice(Math.floor(Math.random() * typeBPartTwoCopy.length), 1)[0];
+      phrase = `${partOne} ${partTwo}`;
+    } else {
+      phrase = typeAPhrasesCopy.splice(Math.floor(Math.random() * typeAPhrasesCopy.length), 1)[0];
+    }
+    const phraseElement = document.createElement("div");
+    phraseElement.classList.add("phrase");
+    phraseElement.textContent = phrase;
+    phraseContainer.appendChild(phraseElement);
+  }
+});
+</script>
+</body>
+</html>
