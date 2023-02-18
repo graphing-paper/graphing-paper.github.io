@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Number Generator</title>
+<style> body {
+	font-family: Arial, sans-serif;
+}
+
+h1 {
+	text-align: center;
+}
+
+label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+select {
+	margin-bottom: 10px;
+}
+
+#output {
+	margin-top: 20px;
+}
+
+.number-image {
+	width: 150px;
+	height: 150px;
+	margin-right: 10px;
+	display: inline-block;
+	vertical-align: middle;
+}
+</style>
+	</head>
+<body>
+<header>
+      <a href="index.html">Home</a>
+    </header>
+<main>
+	<h1>Number Generator</h1>
+	<label for="num-dropdown">How many numbers do you want?</label>
+	<select id="num-dropdown">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+	</select>
+	<br><br>
+	<button id="generate-btn">Generate Numbers</button>
+	<br><br>
+	<div id="output"></div> </main>
+<footer><p>All photos found on the Flickr page of a guy named Brian - <a href="https://www.flickr.com/photos/bcd">https://www.flickr.com/photos/bcd</a></p>
+   
+</footer>
+
+	<script>const numDropdown = document.getElementById('num-dropdown');
+const generateBtn = document.getElementById('generate-btn');
+const outputDiv = document.getElementById('output');
+
+generateBtn.addEventListener('click', generateNumbers);
+
+function generateNumbers() {
+	const numValues = parseInt(numDropdown.value);
+	const values = [];
+	for (let i = 0; i < numValues; i++) {
+		let value;
+		do {
+			value = Math.floor(Math.random() * 5) + 1;
+		} while (values.includes(value));
+		values.push(value);
+	}
+	outputDiv.innerHTML = '';
+	values.forEach(value => {
+		const image = document.createElement('img');
+		image.src = getImageUrl(value);
+		image.alt = `Number ${value}`;
+		image.classList.add('number-image');
+		outputDiv.appendChild(image);
+		const text = document.createElement('span');
+		text.innerText = `${value} `;
+		outputDiv.appendChild(text);
+	});
+}
+
+function getImageUrl(value) {
+	switch (value) {
+		case 1:
+			return 'https://live.staticflickr.com/3836/15044467921_43f35ca1bd_z.jpg';
+		case 2:
+			return 'https://live.staticflickr.com/3888/14860973867_e4c6e9344d_z.jpg';
+		case 3:
+			return 'https://live.staticflickr.com/3877/14860950508_aa4abec26f.jpg';
+		case 4:
+			return 'https://live.staticflickr.com/3877/14860950508_aa4abec26f.jpg';
+		case 5:
+			return 'https://live.staticflickr.com/5560/15047173752_44b456babf_z.jpg';
+		default:
+			return '';
+	}
+}
+</script>
+</body>
+</html>
+
