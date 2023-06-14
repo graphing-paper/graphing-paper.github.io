@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pulsing Square</title>
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: black;
+    }
+
+    .square {
+      width: 200px;
+      height: 200px;
+      background-color: white;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.2);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .text {
+      font-family: "Comic Sans MS", cursive;
+      font-size: 24px;
+      color: black;
+      text-align: center;
+      margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="square">
+      <p class="text">sinner</p>
+    </div>
+  </div>
+</body>
+</html>
