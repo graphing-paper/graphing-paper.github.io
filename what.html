@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>america #1!</title>
+  <style>
+    body {
+      background-color: #000033;
+      background-image: url('https://hauntedpalaceblog.files.wordpress.com/2017/01/busby-chair_hauntedyorkshirecouk.jpg');
+      background-repeat: repeat;
+    }
+
+    .paragraph {
+      max-height: 3em;
+      overflow: hidden;
+      background-color: #000022;
+      padding: 10px;
+      color: #ffffff;
+    }
+
+    .divider {
+      height: 1px;
+      background-color: #f0d9b6;
+      margin: 10px 0;
+    }
+
+    .expand-button {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      cursor: pointer;
+      color: #f0d9b6;
+    }
+  </style>
+  <script>
+    function expandParagraph() {
+      var paragraph = document.getElementById('expandable-paragraph');
+      paragraph.style.maxHeight = 'none';
+      document.getElementById('expand-button').style.display = 'none';
+    }
+  </script>
+</head>
+<body>
+  <div class="paragraph" id="expandable-paragraph">
+    <p>This is paragraph 1 text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac lacinia eros, eu tincidunt ex. Phasellus id elit lectus. Sed accumsan euismod risus nec sollicitudin. In maximus, justo in interdum vestibulum, nulla orci porta lacus, eu maximus tellus ex sed ligula.</p>
+  </div>
+  
+  <div class="divider"></div>
+
+  <div class="paragraph" id="expandable-paragraph">
+    <p>This is paragraph 2 text. Morbi suscipit enim sit amet tortor bibendum, eget volutpat turpis malesuada. Maecenas faucibus venenatis ipsum, id tempor dolor faucibus ut. Nam ultrices nibh lectus, eget lobortis dolor tempus sit amet. Sed nec aliquam felis, nec volutpat est. Nullam sed purus feugiat, efficitur arcu vel, pellentesque mauris. Mauris et ligula vitae est lacinia eleifend nec eu ipsum.</p>
+  </div>
+
+  <div class="expand-button" id="expand-button" onclick="expandParagraph()">Read More</div>
+</body>
+</html>
