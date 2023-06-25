@@ -48,13 +48,25 @@
       "King of Pentacles"
     ];
 
+    function getRandomNumbers(quantity, max) {
+      var numbers = [];
+      while (numbers.length < quantity) {
+        var randomNumber = Math.floor(Math.random() * max) + 1;
+        if (numbers.indexOf(randomNumber) === -1) {
+          numbers.push(randomNumber);
+        }
+      }
+      return numbers;
+    }
+
     function generateResponses() {
       var number = parseInt($("#number").val());
       var responses = [];
+      var randomNumbers = getRandomNumbers(number, tarotCards.length);
 
-      for (var i = 1; i <= number; i++) {
-        var partOne = (i % 2 === 0) ? "reversed" : "upright";
-        var partTwo = tarotCards[i - 1];
+      for (var i = 0; i < number; i++) {
+        var partOne = (randomNumbers[i] % 2 === 0) ? "reversed" : "upright";
+        var partTwo = tarotCards[randomNumbers[i] - 1];
 
         responses.push(partOne + ", " + partTwo);
       }
