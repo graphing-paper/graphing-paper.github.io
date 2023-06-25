@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OK Page</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .response {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>OK Page</h1>
+
+  <label for="number">Select a number (1-10):</label>
+  <select id="number">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+
+  <button id="generate">Generate</button>
+
+  <div id="responses"></div>
+
+  <script>
+    function generateResponses() {
+      var number = parseInt($("#number").val());
+      var responses = [];
+
+      for (var i = 1; i <= number; i++) {
+        var partOne = (i % 2 === 0) ? "reversed" : "upright";
+        var partTwo = "term" + i;
+
+        responses.push(partOne + ", " + partTwo);
+      }
+
+      return responses;
+    }
+
+    function displayResponses() {
+      var responses = generateResponses();
+      var responseHtml = "";
+
+      responses.forEach(function(response) {
+        responseHtml += "<p class='response'>" + response + "</p>";
+      });
+
+      $("#responses").html(responseHtml);
+    }
+
+    $(document).ready(function() {
+      $("#generate").click(function() {
+        displayResponses();
+      });
+    });
+  </script>
+</body>
+</html>
