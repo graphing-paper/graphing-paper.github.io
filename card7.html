@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>what a page</title>
+  <title>what a</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     .response {
       margin-bottom: 10px;
     }
-    body { color: red;
-          background-color: lightblue;
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.4/seedrandom.min.js"></script>
 </head>
@@ -59,8 +57,9 @@
       var randomNumbers = getRandomNumbers(number, tarotCards.length);
 
       for (var i = 0; i < number; i++) {
-        var partOne = (randomNumbers[i] % 2 === 0) ? "reversed" : "upright";
-        var partTwo = tarotCards[randomNumbers[i] - 1];
+        var isReversed = Math.random() < 0.5;
+        var partOne = isReversed ? "reversed" : "upright";
+        var partTwo = tarotCards[randomNumbers[i] - 1] || '';
 
         responses.push(partOne + ", " + partTwo);
       }
