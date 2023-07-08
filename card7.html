@@ -48,15 +48,17 @@
       "King of Pentacles"
     ];
 
-    function getRandomNumbers(quantity, max) {
-      var numbers = [];
-      while (numbers.length < quantity) {
-        var randomNumber = Math.floor(Math.random() * max) + 1;
-        if (numbers.indexOf(randomNumber) === -1) {
-          numbers.push(randomNumber);
-        }
-      }
-      return numbers;
+   function getRandomNumbers(quantity, max) {
+  var numbers = new Set();
+
+  while (numbers.size < quantity) {
+    var randomNumber = Math.floor(Math.random() * (max - 1 + 1) + 1);
+    numbers.add(randomNumber);
+  }
+
+  return Array.from(numbers);
+}
+
     }
 
     function generateResponses() {
