@@ -180,11 +180,9 @@
     }
 
     function getCardImageUrl(cardName) {
-      // Replace this with the actual URLs of your tarot card images
-      // Example: If your images are named as "The Fool.jpg", "The Magician.jpg", etc.
-      // and they are in the same directory as this HTML file, you can use the following logic:
-      return cardName.replace(/ /g, "_") + ".jpg";
-    }
+    var imageName = cardName.toLowerCase().replace(/\s+/g, '-') + ".jpg";
+    return "https://tarotx.net/wp-content/uploads/2019/01/" + imageName;
+  }
 
     $(document).ready(function() {
       $("#generate").click(function() {
