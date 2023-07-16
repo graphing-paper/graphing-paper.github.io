@@ -85,7 +85,6 @@
   <div id="responses"></div>
 
   <script>
-    // Array containing the names of all 72 tarot cards
     var tarotCards = [
       "The Fool", "The Magician", "The High Priestess", "The Empress", "The Emperor", "The Hierophant", "The Lovers",
       "The Chariot", "Strength", "The Hermit", "Wheel of Fortune", "Justice", "The Hanged Man", "Death", "Temperance",
@@ -103,17 +102,16 @@
     ];
 
     function getRandomNumbers(quantity, max) {
-      var numbers = [];
+      var numbers = Array.from({ length: max }, (_, i) => i + 1);
+      var shuffledNumbers = [];
 
-      for (var i = 0; i < quantity; i++) {
-        var seed = Math.floor(Math.random() * 1000000) + 1;
-        var random = new Math.seedrandom(seed.toString());
-        var randomNumber = Math.floor(random() * max) + 1;
-
-        numbers.push(randomNumber);
+      while (numbers.length) {
+        const randomIndex = Math.floor(Math.random() * numbers.length);
+        const [removed] = numbers.splice(randomIndex, 1);
+        shuffledNumbers.push(removed);
       }
 
-      return numbers;
+      return shuffledNumbers.slice(0, quantity);
     }
 
     function generateResponses() {
@@ -159,11 +157,10 @@
 
       $("#responses").html(responseHtml);
 
-      makeCardsDraggable(); // Call the function to make the cards draggable
+      makeCardsDraggable();
     }
 
     function makeCardsDraggable() {
-      // Enable draggable with touch support using Touch Punch library
       $(".response").draggable({
         containment: "body",
         stack: ".draggable",
