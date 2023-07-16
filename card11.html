@@ -6,6 +6,19 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <style>
+        .show-card {
+      opacity: 1;
+    }
+
+    /* Add a new CSS class to hide the card image */
+    .hide-card {
+      opacity: 0;
+    }
+
+    /* Add a new CSS class to rotate the card image */
+    .reversed-card {
+      transform: rotate(180deg);
+    }
     body {
       background-color: antiquewhite; /* Changed to antiquewhite */
     }
@@ -106,6 +119,20 @@
   </div>
 
   <script>
+    function hideOverlay(overlay) {
+      var cardImage = $(overlay).siblings(".card-image");
+
+      // Toggle the CSS classes to show/hide and rotate the card image
+      if (cardImage.hasClass("hide-card")) {
+        cardImage.removeClass("hide-card").addClass("show-card");
+      } else {
+        cardImage.removeClass("show-card").addClass("hide-card");
+      }
+
+      // Toggle the CSS class to rotate the card image
+      cardImage.toggleClass("reversed-card");
+   
+    }
     // Array containing the names and image links of all 78 tarot cards
     var tarotCards = [
       { name: "The Fool", image: "https://tarotx.net/wp-content/uploads/2019/01/the-fool.jpg" },
