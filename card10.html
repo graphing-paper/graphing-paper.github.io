@@ -3,6 +3,8 @@
 <head>
   <title>what a page</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <style>
     .body {
       background-color: dark blue;
@@ -81,7 +83,6 @@
   <div id="responses"></div>
 
   <script>
-    // Your original JavaScript code
     // Array containing the names of all 72 tarot cards
     var tarotCards = [
       "The Fool", "The Magician", "The High Priestess", "The Empress", "The Emperor", "The Hierophant", "The Lovers",
@@ -155,6 +156,16 @@
       responseHtml += "</div>";
 
       $("#responses").html(responseHtml);
+
+      makeCardsDraggable(); // Call the function to make the cards draggable
+    }
+
+    function makeCardsDraggable() {
+      // Enable draggable with touch support using Touch Punch library
+      $(".response").draggable({
+        containment: "body",
+        stack: ".draggable",
+      });
     }
 
     function hideOverlay(overlay) {
@@ -180,5 +191,4 @@
   <br>
   <p>take it easy</p>
 </body>
-  </html>
-  
+</html>
