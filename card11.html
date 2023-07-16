@@ -87,7 +87,7 @@
   <script>
     // Array containing the names of all 72 tarot cards
     var tarotCards = [
-      "the-fool", "the-magician", "the-high-priestess", "the-empress", "the-emperor", "the-hierophant", "the-lovers",
+      "the-fool.jpg", "the-magician.png", "the-high-priestess.png", "the-empress.jpg", "the-emperor.png", "the-hierophant.png", "the-lovers.png",
       "the-chariot", "strength", "the-hermit", "wheel-of-fortune", "justice", "the-hanged-man", "death", "temperance",
       "the-devil", "the-tower", "the-star", "the-moon", "the-sun", "judgment", "the-world", "ace-of-wands", "two-of-wands",
       "three-of-wands", "four-of-wands", "five-of-wands", "six-of-wands", "seven-of-wands", "eight-of-wands",
@@ -178,7 +178,7 @@
     }
 
     function getCardImageUrl(cardName) {
-      var imageName = cardName.toLowerCase().replace(/\s+/g, '-') + ".jpg";
+      var imageName = cardName;
       return "https://tarotx.net/wp-content/uploads/2019/01/" + imageName;
     }
 
