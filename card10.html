@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>what a page</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .body {
+      background-color: dark blue;
+    }
+    .response-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .response {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 10px;
+      text-align: center;
+      width: 180px;
+      height: 300px;
+      background-color: black;
+      color: white;
+      font-size: 20px;
+      position: relative;
+      overflow: hidden;
+      cursor: grab; /* Added draggable cursor */
+      user-drag: element; /* For Safari support */
+      -webkit-user-drag: element; /* For older Safari versions */
+    }
+    .card-image {
+      width: 150px;
+      height: 250px;
+      margin: 0 auto;
+      display: none;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .overlay-text {
+      color: white;
+      font-size: 24px;
+    }
+    .hide {
+      display: none;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.4/seedrandom.min.js"></script>
+</head>
+<body>
+  <h1>tarot</h1>
+
+  <label for="number">Select a number (1-10):</label>
+  <select id="number">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+
+  <button id="generate">Generate</button>
+
+  <div id="responses"></div>
+
+  <script>
+    // Your original JavaScript code
+    // Array containing the names of all 72 tarot cards
+    var tarotCards = [
+      "The Fool", "The Magician", "The High Priestess", "The Empress", "The Emperor", "The Hierophant", "The Lovers",
+      "The Chariot", "Strength", "The Hermit", "Wheel of Fortune", "Justice", "The Hanged Man", "Death", "Temperance",
+      "The Devil", "The Tower", "The Star", "The Moon", "The Sun", "Judgment", "The World", "Ace of Wands", "Two of Wands",
+      "Three of Wands", "Four of Wands", "Five of Wands", "Six of Wands", "Seven of Wands", "Eight of Wands",
+      "Nine of Wands", "Ten of Wands", "Page of Wands", "Knight of Wands", "Queen of Wands", "King of Wands",
+      "Ace of Cups", "Two of Cups", "Three of Cups", "Four of Cups", "Five of Cups", "Six of Cups", "Seven of Cups",
+      "Eight of Cups", "Nine of Cups", "Ten of Cups", "Page of Cups", "Knight of Cups", "Queen of Cups", "King of Cups",
+      "Ace of Swords", "Two of Swords", "Three of Swords", "Four of Swords", "Five of Swords", "Six of Swords",
+      "Seven of Swords", "Eight of Swords", "Nine of Swords", "Ten of Swords", "Page of Swords", "Knight of Swords",
+      "Queen of Swords", "King of Swords", "Ace of Pentacles", "Two of Pentacles", "Three of Pentacles",
+      "Four of Pentacles", "Five of Pentacles", "Six of Pentacles", "Seven of Pentacles", "Eight of Pentacles",
+      "Nine of Pentacles", "Ten of Pentacles", "Page of Pentacles", "Knight of Pentacles", "Queen of Pentacles",
+      "King of Pentacles"
+    ];
+
+    function getRandomNumbers(quantity, max) {
+      var numbers = [];
+
+      for (var i = 0; i < quantity; i++) {
+        var seed = Math.floor(Math.random() * 1000000) + 1;
+        var random = new Math.seedrandom(seed.toString());
+        var randomNumber = Math.floor(random() * max) + 1;
+
+        numbers.push(randomNumber);
+      }
+
+      return numbers;
+    }
+
+    function generateResponses() {
+      var number = parseInt($("#number").val());
+      var responses = [];
+      var randomNumbers = getRandomNumbers(number, tarotCards.length);
+
+      for (var i = 0; i < number; i++) {
+        var isReversed = Math.random() < 0.5;
+        var partOne = isReversed ? "reversed" : "upright";
+        var partTwo = tarotCards[randomNumbers[i] - 1] || '';
+
+        responses.push({
+          position: partOne,
+          card: partTwo
+        });
+      }
+
+      return responses;
+    }
+
+    function displayResponses() {
+      var responses = generateResponses();
+      var responseHtml = "<div class='response-container'>";
+
+      responses.forEach(function(response, index) {
+        var cardId = "card-" + (index + 1);
+        var showClass = response.position === "reversed" ? "hide" : "";
+        var overlayText = response.position === "reversed" ? "Click" : "";
+
+        responseHtml += "<div class='response'>" +
+                        "<div id='" + cardId + "' class='card-image " + showClass + "'>" +
+                        "<img src='placeholder.jpg' alt='Card Image'>" +
+                        "<p>" + response.position + ", " + response.card + "</p>" +
+                        "</div>" +
+                        "<div class='overlay' onclick='hideOverlay(this)'>" +
+                        "<p class='overlay-text'>" + overlayText + "</p>" +
+                        "</div>" +
+                        "</div>";
+      });
+
+      responseHtml += "</div>";
+
+      $("#responses").html(responseHtml);
+    }
+
+    function hideOverlay(overlay) {
+      $(overlay).hide();
+      $(overlay).siblings(".card-image").fadeIn(300);
+    }
+
+    $(document).ready(function() {
+      $("#generate").click(function() {
+        displayResponses();
+      });
+    });
+  </script>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <p>take it easy</p>
+</body>
+  </html>
+  
