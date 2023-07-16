@@ -36,6 +36,8 @@
       width: 150px;
       height: 250px;
       margin: 0 auto;
+    }
+    .card-hidden {
       display: none;
     }
     .overlay {
@@ -85,54 +87,7 @@
   <div id="responses"></div>
 
   <script>
-    // Array containing the names of all 72 tarot cards
-    var tarotCards = [
-      "the-fool", "the-magician", "the-high-priestess", "the-empress", "the-emperor", "the-hierophant", "the-lovers",
-      "the-chariot", "strength", "the-hermit", "wheel-of-fortune", "justice", "the-hanged-man", "death", "temperance",
-      "the-devil", "the-tower", "the-star", "the-moon", "the-sun", "judgment", "the-world", "ace-of-wands", "two-of-wands",
-      "three-of-wands", "four-of-wands", "five-of-wands", "six-of-wands", "seven-of-wands", "eight-of-wands",
-      "nine-of-wands", "ten-of-wands", "page-of-wands", "knight-of-wands", "queen-of-wands", "king-of-wands",
-      "ace-of-cups", "two-of-cups", "three-of-cups", "four-of-cups", "five-of-cups", "six-of-cups", "seven-of-cups",
-      "eight-of-cups", "nine-of-cups", "ten-of-cups", "page-of-cups", "knight-of-cups", "queen-of-cups", "king-of-cups",
-      "ace-of-swords", "two-of-swords", "three-of-swords", "four-of-swords", "five-of-swords", "six-of-swords",
-      "seven-of-swords", "eight-of-swords", "nine-of-swords", "ten-of-swords", "page-of-swords", "knight-of-swords",
-      "queen-of-swords", "king-of-swords", "ace-of-pentacles", "two-of-pentacles", "three-of-pentacles",
-      "four-of-pentacles", "five-of-pentacles", "six-of-pentacles", "seven-of-pentacles", "eight-of-pentacles",
-      "nine-of-pentacles", "ten-of-pentacles", "page-of-pentacles", "knight-of-pentacles", "queen-of-pentacles",
-      "king-of-pentacles"
-    ];
-
-    function generateRandomNumbers(quantity, max) {
-      var numbers = [];
-      var seed = Math.floor(Math.random() * 1000000) + 1;
-      var random = new Math.seedrandom(seed.toString());
-
-      for (var i = 0; i < quantity; i++) {
-        var randomNumber = Math.floor(random() * max) + 1;
-        numbers.push(randomNumber);
-      }
-
-      return numbers;
-    }
-
-    function generateResponses() {
-      var number = parseInt($("#number").val());
-      var responses = [];
-      var randomNumbers = generateRandomNumbers(number, tarotCards.length);
-
-      for (var i = 0; i < number; i++) {
-        var isReversed = Math.random() < 0.5;
-        var partOne = isReversed ? "reversed" : "upright";
-        var partTwo = tarotCards[randomNumbers[i] - 1] || '';
-
-        responses.push({
-          position: partOne,
-          card: partTwo
-        });
-      }
-
-      return responses;
-    }
+    // ... (your original JavaScript code)
 
     function displayResponses() {
       var responses = generateResponses();
@@ -142,18 +97,20 @@
         var cardId = "card-" + (index + 1);
         var showClass = response.position === "reversed" ? "hide" : "";
         var overlayText = response.position === "reversed" ? "Click" : "";
-        // Corrected the image source to display the actual tarot card images
         var imageUrl = getCardImageUrl(response.card);
 
+        // Use a new class "card-hidden" instead of "hide" to control visibility
+        var cardImageClass = response.position === "reversed" ? "card-hidden" : "";
+
         responseHtml += "<div class='response'>" +
-          "<div id='" + cardId + "' class='card-image " + showClass + "'>" +
-          "<img src='" + imageUrl + "' alt='Card Image'>" +
-          "<p>" + response.position + ", " + response.card + "</p>" +
-          "</div>" +
-          "<div class='overlay' onclick='hideOverlay(this)'>" +
-          "<p class='overlay-text'>" + overlayText + "</p>" +
-          "</div>" +
-          "</div>";
+                        "<div id='" + cardId + "' class='card-image " + cardImageClass + "'>" +
+                        "<img src='" + imageUrl + "' alt='Card Image'>" +
+                        "<p>" + response.position + ", " + response.card + "</p>" +
+                        "</div>" +
+                        "<div class='overlay' onclick='hideOverlay(this)'>" +
+                        "<p class='overlay-text'>" + overlayText + "</p>" +
+                        "</div>" +
+                        "</div>";
       });
 
       responseHtml += "</div>";
@@ -163,29 +120,50 @@
       makeCardsDraggable(); // Call the function to make the cards draggable
     }
 
-    function makeCardsDraggable() {
-      // Enable draggable with touch support using Touch Punch library
-      $(".response").draggable({
-        containment: "body",
-        stack: ".draggable",
-      });
-    }
+    // ... (your original JavaScript code)
 
-    function hideOverlay(overlay) {
-      $(overlay).hide();
-      $(overlay).siblings(".card-image").fadeIn(300);
-    }
-
-    function getCardImageUrl(cardName) {
-      var imageName = cardName.toLowerCase().replace(/ /g, '-').replace("'", "") + ".jpg";
-      return "https://tarotx.net/wp-content/uploads/2019/01/" + imageName;
-    }
-
-    $(document).ready(function () {
-      $("#generate").click(function () {
-        displayResponses();
-      });
-    });
   </script>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  resources:
+  <a href=tarotsmith.com/spreads/> tarot spreads </a> <br>
+  <a href=https://bifrosttarot.com/> online bifrost tarot reading </a>
+  <br>
+  <br>
+  <p>take it easy</p>
 </body>
 </html>
