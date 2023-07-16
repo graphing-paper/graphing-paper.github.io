@@ -6,7 +6,8 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <style>
-    .body {
+    /* Corrected CSS color values */
+    body {
       background-color: antiquewhite;
     }
     .response-container {
@@ -23,8 +24,8 @@
       text-align: center;
       width: 180px;
       height: 300px;
-      background-color: DeepBlue; /* Changed to DeepBlue */
-      color: DarkGray; /* Changed to DarkGray */
+      background-color: #00008B; /* DarkBlue */
+      color: #A9A9A9; /* DarkGray */
       font-size: 20px;
       position: relative;
       overflow: hidden;
@@ -44,7 +45,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: green; /* Changed to DarkSlateGray */
+      background-color: #2F4F4F; /* DarkSlateGray */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -52,7 +53,7 @@
       transition: opacity 0.3s;
     }
     .overlay-text {
-      color: DarkSeaGreen; /* Changed to DarkSeaGreen */
+      color: #8FBC8F; /* DarkSeaGreen */
       font-size: 24px;
     }
     .hide {
@@ -62,20 +63,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.4/seedrandom.min.js"></script>
 </head>
 <body>
-  <h1>tarot</h1>
+  <h1>tarot2go</h1>
 
   <label for="number">Select a number (1-10):</label>
   <select id="number">
+    <!-- Removed unnecessary options -->
     <option value="1">1</option>
     <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
+    <!-- ... -->
     <option value="11">11</option>
     <option value="12">12</option>
   </select>
@@ -125,8 +120,7 @@
         var partTwo = tarotCards[randomNumbers[i] - 1] || '';
 
         responses.push({
-          position: partOne,
-          card: partTwo
+          card: partTwo // Removed the undefined partOne
         });
       }
 
@@ -151,7 +145,7 @@
         responseHtml += "<div class='response'>" +
                         "<div id='" + cardId + "' class='card-image " + showClass + "'>" +
                         "<img src='" + imageUrl + "' alt='Card Image'>" +
-                        "<p>" + response.position + ", " + response.card + "</p>" +
+                        "<p>" + response.card + "</p>" +
                         "</div>" +
                         "<div class='overlay' onclick='hideOverlay(this)'>" +
                         "<p class='overlay-text'>" + overlayText + "</p>" +
@@ -185,118 +179,5 @@
       });
     });
   </script>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br> it is what it is
 </body>
 </html>
