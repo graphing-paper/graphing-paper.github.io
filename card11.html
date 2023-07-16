@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>tarot2go</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <style>
+    body {
+      background-color: antiquewhite; /* Changed to antiquewhite */
+    }
+    .response-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .response {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 10px;
+      text-align: center;
+      width: 180px;
+      height: 300px;
+      background-color: deepblue; /* Changed to deepblue */
+      color: AntiqueWhite;
+      font-size: 20px;
+      position: relative;
+      overflow: hidden;
+      cursor: grab; /* Added draggable cursor */
+      user-drag: element; /* For Safari support */
+      -webkit-user-drag: element; /* For older Safari versions */
+    }
+    .card-image {
+      width: 150px;
+      height: 250px;
+      margin: 0 auto;
+      display: none;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .overlay-text {
+      color: white;
+      font-size: 24px;
+    }
+    .hide {
+      display: none;
+    }
+
+    /* New styles */
+    .banner {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    #tarotCard {
+      background-color: deepblue; /* Changed to deepblue */
+    }
+
+    #tarotImage {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transform: rotate(0deg);
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.4/seedrandom.min.js"></script>
+</head>
+<body>
+  <h1>tarot2go</h1>
+
+  <label for="number">Select a number (1-10):</label>
+  <select id="number">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+
+  <button id="generate">Generate</button>
+
+  <div id="responses"></div>
+
+  <!-- Placeholder gif banner -->
+  <div class="banner">
+    <img src="t.gif" alt="Tarot Banner">
+  </div>
+
+  <script>
+    // Array containing the names and image links of all 78 tarot cards
+    var tarotCards = [
+      { name: "The Fool", image: "https://tarotx.net/wp-content/uploads/2019/01/the-fool.jpg" },
+      { name: "The Magician", image: "https://tarotx.net/wp-content/uploads/2019/01/the-magician.jpg" },
+      { name: "The High Priestess", image: "https://tarotx.net/wp-content/uploads/2019/01/the-high-priestess.jpg" },
+      { name: "The Empress", image: "https://tarotx.net/wp-content/uploads/2019/01/the-empress.jpg" },
+      { name: "The Emperor", image: "https://tarotx.net/wp-content/uploads/2019/01/the-emperor.jpg" },
+      { name: "The Hierophant", image: "https://tarotx.net/wp-content/uploads/2019/01/the-hierophant.jpg" },
+      { name: "The Lovers", image: "https://tarotx.net/wp-content/uploads/2019/01/the-lovers.jpg" },
+      { name: "The Chariot", image: "https://tarotx.net/wp-content/uploads/2019/01/the-chariot.jpg" },
+      { name: "Strength", image: "https://tarotx.net/wp-content/uploads/2019/01/strength.jpg" },
+      { name: "The Hermit", image: "https://tarotx.net/wp-content/uploads/2019/01/the-hermit.jpg" },
+      { name: "Wheel of Fortune", image: "https://tarotx.net/wp-content/uploads/2019/01/wheel-of-fortune.jpg" },
+      { name: "Justice", image: "https://tarotx.net/wp-content/uploads/2019/01/justice.jpg" },
+      { name: "The Hanged Man", image: "https://tarotx.net/wp-content/uploads/2019/01/the-hanged-man.jpg" },
+      { name: "Death", image: "https://tarotx.net/wp-content/uploads/2019/01/death.jpg" },
+      { name: "Temperance", image: "https://tarotx.net/wp-content/uploads/2019/01/temperance.jpg" },
+      { name: "The Devil", image: "https://tarotx.net/wp-content/uploads/2019/01/the-devil.jpg" },
+      { name: "The Tower", image: "https://tarotx.net/wp-content/uploads/2019/01/the-tower.jpg" },
+      { name: "The Star", image: "https://tarotx.net/wp-content/uploads/2019/01/the-star.jpg" },
+      { name: "The Moon", image: "https://tarotx.net/wp-content/uploads/2019/01/the-moon.jpg" },
+      { name: "The Sun", image: "https://tarotx.net/wp-content/uploads/2019/01/the-sun.jpg" },
+      { name: "Judgment", image: "https://tarotx.net/wp-content/uploads/2019/01/judgment.jpg" },
+      { name: "The World", image: "https://tarotx.net/wp-content/uploads/2019/01/the-world.jpg" },
+      { name: "Ace of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/ace-of-wands.jpg" },
+      { name: "Two of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/two-of-wands.jpg" },
+      { name: "Three of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/three-of-wands.jpg" },
+      { name: "Four of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/four-of-wands.jpg" },
+      { name: "Five of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/five-of-wands.jpg" },
+      { name: "Six of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/six-of-wands.jpg" },
+      { name: "Seven of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/seven-of-wands.jpg" },
+      { name: "Eight of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/eight-of-wands.jpg" },
+      { name: "Nine of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/nine-of-wands.jpg" },
+      { name: "Ten of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/ten-of-wands.jpg" },
+      { name: "Page of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/page-of-wands.jpg" },
+      { name: "Knight of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/knight-of-wands.jpg" },
+      { name: "Queen of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/queen-of-wands.jpg" },
+      { name: "King of Wands", image: "https://tarotx.net/wp-content/uploads/2019/01/king-of-wands.jpg" },
+      { name: "Ace of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/ace-of-cups.jpg" },
+      { name: "Two of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/two-of-cups.jpg" },
+      { name: "Three of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/three-of-cups.jpg" },
+      { name: "Four of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/four-of-cups.jpg" },
+      { name: "Five of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/five-of-cups.jpg" },
+      { name: "Six of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/six-of-cups.jpg" },
+      { name: "Seven of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/seven-of-cups.jpg" },
+      { name: "Eight of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/eight-of-cups.jpg" },
+      { name: "Nine of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/nine-of-cups.jpg" },
+      { name: "Ten of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/ten-of-cups.jpg" },
+      { name: "Page of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/page-of-cups.jpg" },
+      { name: "Knight of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/knight-of-cups.jpg" },
+      { name: "Queen of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/queen-of-cups.jpg" },
+      { name: "King of Cups", image: "https://tarotx.net/wp-content/uploads/2019/01/king-of-cups.jpg" },
+      { name: "Ace of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/ace-of-swords.jpg" },
+      { name: "Two of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/two-of-swords.jpg" },
+      { name: "Three of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/three-of-swords.jpg" },
+      { name: "Four of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/four-of-swords.jpg" },
+      { name: "Five of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/five-of-swords.jpg" },
+      { name: "Six of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/six-of-swords.jpg" },
+      { name: "Seven of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/seven-of-swords.jpg" },
+      { name: "Eight of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/eight-of-swords.jpg" },
+      { name: "Nine of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/nine-of-swords.jpg" },
+      { name: "Ten of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/ten-of-swords.jpg" },
+      { name: "Page of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/page-of-swords.jpg" },
+      { name: "Knight of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/knight-of-swords.jpg" },
+      { name: "Queen of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/queen-of-swords.jpg" },
+      { name: "King of Swords", image: "https://tarotx.net/wp-content/uploads/2019/01/king-of-swords.jpg" },
+      { name: "Ace of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/ace-of-pentacles.jpg" },
+      { name: "Two of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/two-of-pentacles.jpg" },
+      { name: "Three of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/three-of-pentacles.jpg" },
+      { name: "Four of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/four-of-pentacles.jpg" },
+      { name: "Five of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/five-of-pentacles.jpg" },
+      { name: "Six of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/six-of-pentacles.jpg" },
+      { name: "Seven of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/seven-of-pentacles.jpg" },
+      { name: "Eight of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/eight-of-pentacles.jpg" },
+      { name: "Nine of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/nine-of-pentacles.jpg" },
+      { name: "Ten of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/ten-of-pentacles.jpg" },
+      { name: "Page of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/page-of-pentacles.jpg" },
+      { name: "Knight of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/knight-of-pentacles.jpg" },
+      { name: "Queen of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/queen-of-pentacles.jpg" },
+      { name: "King of Pentacles", image: "https://tarotx.net/wp-content/uploads/2019/01/king-of-pentacles.jpg" },
+    ];
+
+    function getRandomNumbers(quantity, max) {
+      var numbers = [];
+
+      for (var i = 0; i < quantity; i++) {
+        var seed = Math.floor(Math.random() * 1000000) + 1;
+        var random = new Math.seedrandom(seed.toString());
+        var randomNumber = Math.floor(random() * max) + 1;
+
+        numbers.push(randomNumber);
+      }
+
+      return numbers;
+    }
+
+    function generateResponses() {
+      var number = parseInt($("#number").val());
+      var responses = [];
+      var randomNumbers = getRandomNumbers(number, tarotCards.length);
+
+      for (var i = 0; i < number; i++) {
+        var isReversed = Math.random() < 0.5;
+        var partOne = isReversed ? "reversed" : "upright";
+        var partTwo = tarotCards[randomNumbers[i] - 1].name || '';
+
+        responses.push({
+          position: partOne,
+          card: partTwo
+        });
+      }
+
+      return responses;
+    }
+
+    function displayResponses() {
+      var responses = generateResponses();
+      var responseHtml = "<div class='response-container'>";
+
+      responses.forEach(function(response, index) {
+        var cardId = "card-" + (index + 1);
+        var showClass = response.position === "reversed" ? "hide" : "";
+        var overlayText = response.position === "reversed" ? "Click" : "";
+
+        responseHtml += "<div class='response'>" +
+                        "<div id='" + cardId + "' class='card-image " + showClass + "'>" +
+                        "<img src='" + tarotCards[index].image + "' alt='" + response.card + "' id='tarotImage'>" +
+                        "<p>" + response.position + ", " + response.card + "</p>" +
+                        "</div>" +
+                        "<div class='overlay' onclick='hideOverlay(this)'>" +
+                        "<p class='overlay-text'>" + overlayText + "</p>" +
+                        "</div>" +
+                        "</div>";
+      });
+
+      responseHtml += "</div>";
+
+      $("#responses").html(responseHtml);
+
+      makeCardsDraggable();
+    }
+
+    function hideOverlay(overlay) {
+      $(overlay).css("opacity", "0");
+      $(overlay).siblings(".card-image").removeClass("hide");
+    }
+
+    function makeCardsDraggable() {
+      $(".card-image").draggable({
+        revert: function(droppableObj) {
+          return !droppableObj;
+        },
+        zIndex: 100
+      });
+    }
+
+    $("#generate").click(displayResponses);
+
+    displayResponses(); // Display initial responses on page load
+  </script>
+</body>
+</html>
