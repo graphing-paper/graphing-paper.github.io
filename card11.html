@@ -23,8 +23,8 @@
       text-align: center;
       width: 180px;
       height: 300px;
-      background-color: Olive;
-      color: DarkGray;
+      background-color: DarkSeaGreen;
+      color: MintCream;
       font-size: 20px;
       position: relative;
       overflow: hidden;
@@ -76,8 +76,8 @@
     <option value="8">8</option>
     <option value="9">9</option>
     <option value="10">10</option>
-    <option value="11">11</option>
-    <option value="12">12</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
   </select>
 
   <button id="generate">Generate</button>
@@ -85,58 +85,49 @@
   <div id="responses"></div>
 
   <script>
-    // Array containing the names of all 72 tarot cards
     var tarotCards = [
-      "the-fool.PNG", "the-magician.PNG", "the-high-priestess.PNG", "the-empress.PNG", "the-emperor.PNG", "the-hierophant.PNG", "the-lovers.PNG",
-      "the-chariot.PNG", "strength.PNG", "the-hermit.PNG", "wheel-of-fortune.PNG", "justice.PNG", "the-hanged-man.PNG", "death.PNG", "temperance.PNG",
-      "the-devil.PNG", "the-tower.PNG", "the-star.PNG", "the-moon.PNG", "the-sun.PNG", "judgment.PNG", "the-world.PNG", "ace-of-wands.PNG", "two-of-wands.PNG",
-      "three-of-wands.PNG", "four-of-wands.PNG", "five-of-wands.PNG", "six-of-wands.PNG", "seven-of-wands.PNG", "eight-of-wands.PNG",
-      "nine-of-wands.PNG", "ten-of-wands.PNG", "page-of-wands.PNG", "knight-of-wands.PNG", "queen-of-wands.PNG", "king-of-wands.PNG",
-      "ace-of-cups.PNG", "two-of-cups.PNG", "three-of-cups.PNG", "four-of-cups.PNG", "five-of-cups.PNG", "six-of-cups.PNG", "seven-of-cups.PNG",
-      "eight-of-cups.PNG", "nine-of-cups.PNG", "ten-of-cups.PNG", "page-of-cups.PNG", "knight-of-cups.PNG", "queen-of-cups.PNG", "king-of-cups.PNG",
-      "ace-of-swords.PNG", "two-of-swords.PNG", "three-of-swords.PNG", "four-of-swords.PNG", "five-of-swords.PNG", "six-of-swords.PNG",
-      "seven-of-swords.PNG", "eight-of-swords.PNG", "nine-of-swords.PNG", "ten-of-swords.PNG", "page-of-swords.PNG", "knight-of-swords.PNG",
-      "queen-of-swords.PNG", "king-of-swords.PNG", "ace-of-pentacles.PNG", "two-of-pentacles.PNG", "three-of-pentacles.PNG",
-      "four-of-pentacles.PNG", "five-of-pentacles.PNG", "six-of-pentacles.PNG", "seven-of-pentacles.PNG", "eight-of-pentacles.PNG",
-      "nine-of-pentacles.PNG", "ten-of-pentacles.PNG", "page-of-pentacles.PNG", "knight-of-pentacles.PNG", "queen-of-pentacles.PNG",
-      "king-of-pentacles.PNG"
+      "The Fool", "The Magician", "The High Priestess", "The Empress", "The Emperor", "The Hierophant", "The Lovers",
+      "The Chariot", "Strength", "The Hermit", "Wheel of Fortune", "Justice", "The Hanged Man", "Death", "Temperance",
+      "The Devil", "The Tower", "The Star", "The Moon", "The Sun", "Judgment", "The World", "Ace of Wands", "Two of Wands",
+      "Three of Wands", "Four of Wands", "Five of Wands", "Six of Wands", "Seven of Wands", "Eight of Wands",
+      "Nine of Wands", "Ten of Wands", "Page of Wands", "Knight of Wands", "Queen of Wands", "King of Wands",
+      "Ace of Cups", "Two of Cups", "Three of Cups", "Four of Cups", "Five of Cups", "Six of Cups", "Seven of Cups",
+      "Eight of Cups", "Nine of Cups", "Ten of Cups", "Page of Cups", "Knight of Cups", "Queen of Cups", "King of Cups",
+      "Ace of Swords", "Two of Swords", "Three of Swords", "Four of Swords", "Five of Swords", "Six of Swords",
+      "Seven of Swords", "Eight of Swords", "Nine of Swords", "Ten of Swords", "Page of Swords", "Knight of Swords",
+      "Queen of Swords", "King of Swords", "Ace of Pentacles", "Two of Pentacles", "Three of Pentacles",
+      "Four of Pentacles", "Five of Pentacles", "Six of Pentacles", "Seven of Pentacles", "Eight of Pentacles",
+      "Nine of Pentacles", "Ten of Pentacles", "Page of Pentacles", "Knight of Pentacles", "Queen of Pentacles",
+      "King of Pentacles"
     ];
 
     function getRandomNumbers(quantity, max) {
-      var numbers = [];
+      var numbers = Array.from({ length: max }, (_, i) => i + 1);
+      var shuffledNumbers = [];
 
-      for (var i = 0; i < quantity; i++) {
-        var seed = Math.floor(Math.random() * 1000000) + 1;
-        var random = new Math.seedrandom(seed.toString());
-        var randomNumber = Math.floor(random() * max) + 1;
-
-        numbers.push(randomNumber);
+      while (numbers.length) {
+        const randomIndex = Math.floor(Math.random() * numbers.length);
+        const [removed] = numbers.splice(randomIndex, 1);
+        shuffledNumbers.push(removed);
       }
 
-      return numbers;
+      return shuffledNumbers.slice(0, quantity);
     }
 
     function generateResponses() {
       var number = parseInt($("#number").val());
       var responses = [];
-      var usedCards = [];
+      var randomNumbers = getRandomNumbers(number, tarotCards.length);
 
-      while (responses.length < number) {
-        var randomIndex = Math.floor(Math.random() * tarotCards.length);
-        var randomCard = tarotCards[randomIndex];
+      for (var i = 0; i < number; i++) {
+        var isReversed = Math.random() < 0.5;
+        var partOne = isReversed ? "reversed" : "upright";
+        var partTwo = tarotCards[randomNumbers[i] - 1] || '';
 
-        if (!usedCards.includes(randomCard)) {
-          usedCards.push(randomCard);
-
-          var isReversed = Math.random() < 0.5;
-          var partOne = isReversed ? "reversed" : "upright";
-          var partTwo = randomCard.split(".")[0]; // Remove the file extension
-
-          responses.push({
-            position: partOne,
-            card: partTwo
-          });
-        }
+        responses.push({
+          position: partOne,
+          card: partTwo
+        });
       }
 
       return responses;
@@ -150,11 +141,10 @@
         var cardId = "card-" + (index + 1);
         var showClass = response.position === "reversed" ? "hide" : "";
         var overlayText = response.position === "reversed" ? "Click" : "";
-        var imageUrl = getCardImageUrl(response.card);
 
         responseHtml += "<div class='response'>" +
                         "<div id='" + cardId + "' class='card-image " + showClass + "'>" +
-                        "<img src='" + imageUrl + "' alt='Card Image'>" +
+                        "<img src='placeholder.jpg' alt='Card Image'>" +
                         "<p>" + response.position + ", " + response.card + "</p>" +
                         "</div>" +
                         "<div class='overlay' onclick='hideOverlay(this)'>" +
@@ -182,17 +172,52 @@
       $(overlay).siblings(".card-image").fadeIn(300);
     }
 
-    function getCardImageUrl(cardName) {
-      var imageName = cardName.toLowerCase().replace(/\s+/g, '-') + ".PNG";
-      return "https://tarotx.net/wp-content/uploads/2019/01/" + imageName;
-    }
-
     $(document).ready(function() {
       $("#generate").click(function() {
         displayResponses();
       });
     });
   </script>
-  <!-- ... (same as before) ... -->
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  resources:
+  <a href=tarotsmith.com/spreads/> tarot spreads </a> <br>
+  <a href=https://bifrosttarot.com/> online bifrost tarot reading </a>
+  <br>
+  <br>
+  <p>take it easy</p>
 </body>
 </html>
