@@ -28,9 +28,9 @@
       font-size: 20px;
       position: relative;
       overflow: hidden;
-      cursor: grab; /* Added draggable cursor */
-      user-drag: element; /* For Safari support */
-      -webkit-user-drag: element; /* For older Safari versions */
+      cursor: grab;
+      user-drag: element;
+      -webkit-user-drag: element;
     }
     .card-image {
       width: 150px;
@@ -58,6 +58,9 @@
     .hide {
       display: none;
     }
+    .reversed {
+      transform: rotateY(180deg);
+    }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.4/seedrandom.min.js"></script>
 </head>
@@ -76,8 +79,8 @@
     <option value="8">8</option>
     <option value="9">9</option>
     <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
   </select>
 
   <button id="generate">Generate</button>
@@ -144,7 +147,7 @@
 
         responseHtml += "<div class='response'>" +
                         "<div id='" + cardId + "' class='card-image " + showClass + "'>" +
-                        "<img src='placeholder.jpg' alt='Card Image'>" +
+                        "<img src='https://gfx.tarot.com/images/site/decks/rider/full_size/" + (response.position === "reversed" ? 22 + randomNumbers[index] : randomNumbers[index]) + ".jpg' alt='Card Image'>" +
                         "<p>" + response.position + ", " + response.card + "</p>" +
                         "</div>" +
                         "<div class='overlay' onclick='hideOverlay(this)'>" +
@@ -168,8 +171,15 @@
     }
 
     function hideOverlay(overlay) {
-      $(overlay).hide();
-      $(overlay).siblings(".card-image").fadeIn(300);
+      const $overlay = $(overlay);
+      const $cardImage = $overlay.siblings(".card-image");
+
+      if ($cardImage.hasClass("reversed")) {
+        $cardImage.removeClass("reversed");
+      } else {
+        $overlay.hide();
+        $cardImage.addClass("reversed");
+      }
     }
 
     $(document).ready(function() {
@@ -186,25 +196,30 @@
   <br>
   <br>
   <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <br>
   <br>
   <br>
