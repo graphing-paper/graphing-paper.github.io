@@ -28,9 +28,9 @@
       font-size: 20px;
       position: relative;
       overflow: hidden;
-      cursor: grab;
-      user-drag: element;
-      -webkit-user-drag: element;
+      cursor: grab; /* Added draggable cursor */
+      user-drag: element; /* For Safari support */
+      -webkit-user-drag: element; /* For older Safari versions */
     }
     .card-image {
       width: 150px;
@@ -58,8 +58,106 @@
     .hide {
       display: none;
     }
-    .reversed {
-      transform: rotateY(180deg);
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.4/seedrandom.min.js"></script>
+</head>
+<body>
+  <h1>tarot</h1>
+
+  <label for="number">Select a number (1-10):</label>
+  <select id="number">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+  </select>
+
+  <button id="generate">Generate</button>
+
+  <div id="responses"></div>
+
+  <script>
+    var tarotCards = [
+      "The Fool", "The Magician", "The High Priestess", "The Empress", "The Emperor", "The Hierophant", "The Lovers",
+      "The Chariot", "Strength", "The Hermit", "Wheel of Fortune", "Justice", "The Hanged Man", "Death", "Temperance",
+      "The Devil", "The Tower", "The Star", "The Moon", "The Sun", "Judgment", "The World",
+      "Ace of Wands", "Two of Wands", "Three of Wands", "Four of Wands", "Five of Wands", "Six of Wands", "Seven of Wands",
+      "Eight of Wands", "Nine of Wands", "Ten of Wands", "Page of Wands", "Knight of Wands", "Queen of Wands", "King of Wands",
+      "Ace of Cups", "Two of Cups", "Three of Cups", "Four of Cups", "Five of Cups", "Six of Cups", "Seven of Cups",
+      "Eight of Cups", "Nine of Cups", "Ten of Cups", "Page of Cups", "Knight of Cups", "Queen of Cups", "King of Cups",
+      "Ace of Swords", "Two of Swords", "Three of Swords", "Four of Swords", "Five of Swords", "Six of Swords",
+      "Seven of Swords", "Eight of Swords", "Nine of Swords", "Ten of Swords", "Page of Swords", "Knight of Swords",
+      "Queen of Swords", "King of Swords", "Ace of Pentacles", "Two of Pentacles", "Three of Pentacles",
+      "Four of Pentacles", "Five of PentI apologize for the incomplete response. Here's the complete code incorporating the changes you outlined:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>tarot2go</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <style>
+    body {
+      background-color: AntiqueWhite;
+    }
+    .response-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .response {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 10px;
+      text-align: center;
+      width: 180px;
+      height: 300px;
+      background-color: DarkSeaGreen;
+      color: MintCream;
+      font-size: 20px;
+      position: relative;
+      overflow: hidden;
+      cursor: grab; /* Added draggable cursor */
+      user-drag: element; /* For Safari support */
+      -webkit-user-drag: element; /* For older Safari versions */
+    }
+    .card-image {
+      width: 150px;
+      height: 250px;
+      margin: 0 auto;
+      display: none;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: DarkSlateGray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+    .overlay-text {
+      color: DarkSeaGreen;
+      font-size: 24px;
+    }
+    .hide {
+      display: none;
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.4/seedrandom.min.js"></script>
@@ -91,101 +189,83 @@
     var tarotCards = [
       "The Fool", "The Magician", "The High Priestess", "The Empress", "The Emperor", "The Hierophant", "The Lovers",
       "The Chariot", "Strength", "The Hermit", "Wheel of Fortune", "Justice", "The Hanged Man", "Death", "Temperance",
-      "The Devil", "The Tower", "The Star", "The Moon", "The Sun", "Judgment", "The World", "Ace of Wands", "Two of Wands",
-      "Three of Wands", "Four of Wands", "Five of Wands", "Six of Wands", "Seven of Wands", "Eight of Wands",
-      "Nine of Wands", "Ten of Wands", "Page of Wands", "Knight of Wands", "Queen of Wands", "King of Wands",
+      "The Devil", "The Tower", "The Star", "The Moon", "The Sun", "Judgment", "The World",
+      "Ace of Wands", "Two of Wands", "Three of Wands", "Four of Wands", "Five of Wands", "Six of Wands", "Seven of Wands",
+      "Eight of Wands", "Nine of Wands", "Ten of Wands", "Page of Wands", "Knight of Wands", "Queen of Wands", "King of Wands",
       "Ace of Cups", "Two of Cups", "Three of Cups", "Four of Cups", "Five of Cups", "Six of Cups", "Seven of Cups",
       "Eight of Cups", "Nine of Cups", "Ten of Cups", "Page of Cups", "Knight of Cups", "Queen of Cups", "King of Cups",
       "Ace of Swords", "Two of Swords", "Three of Swords", "Four of Swords", "Five of Swords", "Six of Swords",
       "Seven of Swords", "Eight of Swords", "Nine of Swords", "Ten of Swords", "Page of Swords", "Knight of Swords",
       "Queen of Swords", "King of Swords", "Ace of Pentacles", "Two of Pentacles", "Three of Pentacles",
-      "Four of Pentacles", "Five of Pentacles", "Six of Pentacles", "Seven of Pentacles", "Eight of Pentacles",
+      "Four of Pentacles", "Four of Pentacles", "Five of Pentacles", "Six of Pentacles", "Seven of Pentacles", "Eight of Pentacles",
       "Nine of Pentacles", "Ten of Pentacles", "Page of Pentacles", "Knight of Pentacles", "Queen of Pentacles",
       "King of Pentacles"
     ];
 
-    function getRandomNumbers(quantity, max) {
-      var numbers = Array.from({ length: max }, (_, i) => i + 1);
-      var shuffledNumbers = [];
+    function generateRandomCards(number) {
+      var randomCards = [];
+      var currentIndex = tarotCards.length;
+      var temporaryValue, randomIndex;
 
-      while (numbers.length) {
-        const randomIndex = Math.floor(Math.random() * numbers.length);
-        const [removed] = numbers.splice(randomIndex, 1);
-        shuffledNumbers.push(removed);
+      // Make a copy of the tarotCards array
+      var arrayCopy = tarotCards.slice();
+
+      // Shuffle the copy of the array using Fisher-Yates algorithm
+      while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        temporaryValue = arrayCopy[currentIndex];
+        arrayCopy[currentIndex] = arrayCopy[randomIndex];
+        arrayCopy[randomIndex] = temporaryValue;
       }
 
-      return shuffledNumbers.slice(0, quantity);
+      // Select the first 'number' cards from the shuffled array
+      randomCards = arrayCopy.slice(0, number);
+
+      return randomCards;
     }
 
-    function generateResponses() {
-      var number = parseInt($("#number").val());
-      var responses = [];
-      var randomNumbers = getRandomNumbers(number, tarotCards.length);
+    function displayCards(cards) {
+      var responseContainer = document.getElementById("responses");
+      responseContainer.innerHTML = "";
 
-      for (var i = 0; i < number; i++) {
-        var isReversed = Math.random() < 0.5;
-        var partOne = isReversed ? "reversed" : "upright";
-        var partTwo = tarotCards[randomNumbers[i] - 1] || '';
+      for (var i = 0; i < cards.length; i++) {
+        var cardName = cards[i];
+        var cardNumber = i + 1;
+        var imageUrl = `https://gfx.tarot.com/images/site/decks/rider/full_size/${i}.jpg`;
 
-        responses.push({
-          position: partOne,
-          card: partTwo
-        });
-      }
+        var response = document.createElement("div");
+        response.className = "response";
 
-      return responses;
-    }
+        var cardImage = document.createElement("img");
+        cardImage.className = "card-image";
+        cardImage.src = imageUrl;
 
-    function displayResponses() {
-      var responses = generateResponses();
-      var responseHtml = "<div class='response-container'>";
+        var overlay = document.createElement("div");
+        overlay.className = "overlay";
 
-      responses.forEach(function(response, index) {
-        var cardId = "card-" + (index + 1);
-        var showClass = response.position === "reversed" ? "hide" : "";
-        var overlayText = response.position === "reversed" ? "Click" : "";
+        var overlayText = document.createElement("p");
+        overlayText.className = "overlay-text";
+        overlayText.textContent = `Card ${cardNumber}: ${cardName}`;
 
-        responseHtml += "<div class='response'>" +
-                        "<div id='" + cardId + "' class='card-image " + showClass + " " + response.position + "'>" +
-                        "<img src='https://gfx.tarot.com/images/site/decks/rider/full_size/" + (response.position === "reversed" ? 22 + randomNumbers[index] : randomNumbers[index]) + ".jpg' alt='Card Image'>" +
-                        "<p>" + response.position + ", " + response.card + "</p>" +
-                        "</div>" +
-                        "<div class='overlay' onclick='hideOverlay(this)'>" +
-                        "<p class='overlay-text'>" + overlayText + "</p>" +
-                        "</div>" +
-                        "</div>";
-      });
-
-      responseHtml += "</div>";
-
-      $("#responses").html(responseHtml);
-
-      makeCardsDraggable();
-    }
-
-    function makeCardsDraggable() {
-      $(".response").draggable({
-        containment: "body",
-        stack: ".draggable",
-      });
-    }
-
-    function hideOverlay(overlay) {
-      const $overlay = $(overlay);
-      const $cardImage = $overlay.siblings(".card-image");
-
-      if ($cardImage.hasClass("reversed")) {
-        $cardImage.removeClass("reversed");
-      } else {
-        $overlay.hide();
-        $cardImage.addClass("reversed");
+        overlay.appendChild(overlayText);
+        response.appendChild(cardImage);
+        response.appendChild(overlay);
+        responseContainer.appendChild(response);
       }
     }
 
-    $(document).ready(function() {
-      $("#generate").click(function() {
-        displayResponses();
-      });
+    // Generate button click event handler
+    document.getElementById("generate").addEventListener("click", function () {
+      var number = parseInt(document.getElementById("number").value);
+      var randomCards = generateRandomCards(number);
+      displayCards(randomCards);
+    });
+
+    // Make the response elements draggable
+    $(function () {
+      $(".response").draggable();
     });
   </script>
 </body>
