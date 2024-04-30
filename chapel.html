@@ -2,17 +2,17 @@
 <html>
 <head>
   <style>
-/* styles.css */
-
-
-
+    /* styles.css */
+body {
+  cursor: none; /* Hide the default cursor */
+}
 
 .page {
   background-color: #e0e0e0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px; /* Optional padding for spacing */
+  padding: 20px;
 }
 
 .candle-section {
@@ -27,7 +27,7 @@
 }
 
 .image-container {
-  margin-bottom: 20px; /* Optional spacing between image and text */
+  margin-bottom: 20px; /* Space between image and text */
 }
 
 .columns {
@@ -39,24 +39,9 @@
   width: 30%; /* Each column takes up 30% of the content width */
 }
 
-.left-column {
-  background-color: #e8e8e8;
-}
-
-.right-column {
-  background-color: #dcdcdc;
-}
-
-.third-column {
-  background-color: #c8c8c8;
-}
-
 footer {
   margin-top: 20px;
   text-align: center; /* Center-align the footer content */
-}
-body {
-  cursor: none; /* Hide the default cursor */
 }
 
 #highlight {
@@ -69,27 +54,26 @@ body {
   pointer-events: none; /* Prevent interference */
 }
 
-#candle {
+#cursor-candle {
   position: absolute; /* Make the candle float above the highlight */
   width: 50px; /* Adjust as needed */
   height: auto; /* Maintain aspect ratio */
 }
 
-</style>
-
-<script>
+  </style>
+  <script>
     function toggleCandle(side) {
       const candleId = `candle-${side}`;
       const candle = document.getElementById(candleId);
       const page = document.querySelector(`.${side}-candle`);
 
-      if (candle.src.includes("dark")) {
-        candle.src = "candlelit.gif"; // Change to light candle
-        page.style.backgroundColor = "#f0f0f0"; // Lighten the background color
+      if (candle.src.includes("candle.png")) {
+        candle.src = "candlelit.webp"; // Change to lit candle
+        page.style.backgroundColor = "#f0f0f0"; // Lighten background
 
         setTimeout(() => {
-          candle.src = "candle.png"; // Revert to dark candle after 60 seconds
-          page.style.backgroundColor = "#e0e0e0"; // Revert background color
+          candle.src = "candle.png"; // Revert after 60 seconds
+          page.style.backgroundColor = "#e0e0e0";
         }, 60000);
       } else {
         candle.src = "candle.png";
@@ -97,10 +81,10 @@ body {
       }
     }
 
- document.addEventListener("mousemove", function(event) {
+    document.addEventListener("mousemove", function(event) {
       // Create or update the highlight elements
       let highlight = document.getElementById("highlight");
-      let candle = document.getElementById("candle");
+      let cursorCandle = document.getElementById("cursor-candle");
 
       if (!highlight) {
         highlight = document.createElement("div");
@@ -108,77 +92,56 @@ body {
         document.body.appendChild(highlight);
       }
 
-      if (!candle) {
-        candle = document.createElement("img");
-        candle.id = "candle";
-        candle.src = "candle.gif"; // Specify the path to the candle GIF
-        document.body.appendChild(candle);
+      if (!cursorCandle) {
+        cursorCandle = document.createElement("img");
+        cursorCandle.id = "cursor-candle";
+        cursorCandle.src = "candlelit.webp"; // Specify path to the cursor image
+        document.body.appendChild(cursorCandle);
       }
 
-      // Position the highlight and candle elements based on the cursor position
-      highlight.style.left = `${event.pageX - 75}px`; // Center the highlight
+      // Position both elements based on cursor position
+      highlight.style.left = `${event.pageX - 75}px`;
       highlight.style.top = `${event.pageY - 75}px`;
 
-      candle.style.left = `${event.pageX - 25}px`; // Position candle in the center of the highlight
-      candle.style.top = `${event.pageY - 25}px`;
+      cursorCandle.style.left = `${event.pageX - 25}px`;
+      cursorCandle.style.top = `${event.pageY - 25}px`;
     });
   </script>
-
 </head>
 <body>
   <div class="page">
     <div class="candle-section left-candle">
       <a href="#" onclick="toggleCandle('left')">
-        <img width="100px"id="candle-left" src="candle.png" alt="Candle">
+        <img id="candle-left" src="candle.png" width="100px" alt="Candle">
       </a>
     </div>
 
     <div class="center-content">
       <div class="image-container">
-        <img src="ca.png" alt="Chapel Image">
+        <img src="ca.png" alt="Chapel Image" width="150px">
       </div>
 
       <div class="columns">
         <div class="column left-column">
-          <p>I keep you in my heart. may the Lord God protect you. may they remember your heart's desire and trust you with his hand. </p>
-          <p>Glory to the father, and to the son, and to the holy Spirit. forever and ever, world without end. </p>
-          <p>Tby your will, all things.
-    <br><br>by your kindness, heart
-    <br><br> To you Lord, I make my prayer for mercy. 
-    <br><br> To you Lord, I make my prayer for mercy
-    <br> <br>Glory to the Father, and to the Son and to the Holy Spirit. As it was in the beginning, is now, and ever will be, world without end. </p>
-          <p> Lord hear our prayers</p>
+          <p>I keep you in my heart. May the Lord God protect you...</p>
+          <p>Glory to the Father, and to the Son, and to the Holy Spirit...</p>
         </div>
 
         <div class="column right-column">
-          <p> Goodwill - A necessary condition for the peace of the soul
-    <br>     There are two paths. One towards God, and one away from Them. 
-    <br>                 go towards God
-    <br>                     this discomfort</p>
-          <p> <br>             (says)
-    <br>                REPENT FROM SIN
-    <br>                LET YOURSELF BE PURIFIED</p>
-          <p> <br>
-    <br>          for fourty days and fourth nights
-    <br>             christ wandered the desert
-    <br>           for fourty days and fourth nights
-    <br>              christ againt temptation</p>
-          <p>I fall. I pray. We are quiet. </p>
+          <p>Goodwill - A necessary condition for the peace of the soul...</p>
+          <p>Let your heart be purified and your spirit cleansed...</p>
         </div>
 
         <div class="column third-column">
-          <p> <br>
-  <br>      Thank you. thank you for all you have given me. thank you for food and shelter. for movement. thank you for art and music.   <br>      thank you for love. thank you for trees and understanding. thank you for the people I love. my friends, my family, those in madness and in faith,</p>
-          <p> <br>       whoever she is. thank you for this love, this hope, this life. Lord, make me an instrument of your Peace. where there is hated
-    <br>     let me sew love. where there is injury, pardon. where there is doubt, faith, where there is despair, hope. OH Divine Master, grant
-    <br>     that I may love. That I may console. That I may bring hope and peace and happiness in all ways. </p>
+          <p>Thank you, Lord, for all that you have given me...</p>
+          <p>Make me an instrument of your peace...</p>
         </div>
       </div>
     </div>
 
     <div class="candle-section right-candle">
       <a href="#" onclick="toggleCandle('right')">
-        <img id="candle-right" width="100px"src="candle.png" alt="Candle">
+        <img id="candle-right" src="candle.png" width="100px" alt="Candle">
       </a>
     </div>
 
@@ -186,7 +149,5 @@ body {
       <a href="index.html">Return to Home</a>
     </footer>
   </div>
-
-  
 </body>
 </html>
