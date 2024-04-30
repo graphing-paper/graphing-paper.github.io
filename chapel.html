@@ -27,7 +27,7 @@
     }
 
     .image-container {
-      margin-bottom: 20px; /* Space between image and text */
+      margin-bottom: 20px; /* Space between the image and text */
     }
 
     .columns {
@@ -39,18 +39,6 @@
       width: 30%; /* Each column takes up 30% of the content width */
     }
 
-    .left-column {
-      background-color: #e8e8e8;
-    }
-
-    .right-column {
-      background-color: #dcdcdc;
-    }
-
-    .third-column {
-      background-color: #c8c8c8;
-    }
-
     .footer {
       margin-top: 20px;
       text-align: center; /* Center-align the footer content */
@@ -60,15 +48,16 @@
       position: absolute;
       width: 150px; /* Larger circle */
       height: 150px;
-      background: rgba(255, 255, 0, 0.05); /* Lighter yellow circle */
+      background: rgba(255, 255, 0, 0.1); /* Lighter yellow circle */
       border-radius: 50%; /* Make it circular */
-      mix-blend-mode: lighten; /* Lighter blending mode */
+      mix-blend-mode: lighten; /* Blending mode */
     }
 
     #cursor-candle {
       position: absolute; /* Make the candle float above the highlight */
       width: 50px; /* Adjust as needed */
       height: auto; /* Maintain aspect ratio */
+      pointer-events: none; /* Prevent interference */
     }
   </style>
 
@@ -93,7 +82,6 @@
     }
 
     document.addEventListener("mousemove", function(event) {
-      // Create or update the highlight elements
       let highlight = document.getElementById("highlight");
       let cursorCandle = document.getElementById("cursor-candle");
 
@@ -106,8 +94,8 @@
       if (!cursorCandle) {
         cursorCandle = document.createElement("img");
         cursorCandle.id = "cursor-candle";
-        cursorCandle.src = "candlelit.webp"; // Specify path to the cursor image
-        document.body appended it;
+        cursorCandle.src = "candlelit.webp"; // Path to the cursor image
+        document.body.appendChild(cursorCandle);
       }
 
       // Position both elements based on cursor position
@@ -131,6 +119,15 @@
       <div class="image-container">
         <img src="ca.png" alt="Chapel Image" width="100px">
       </div>
+
+      <div class="candle-section right-candle">
+        <a href="#" onclick="toggleCandle('right')">
+          <img id="candle-right" src="candle.png" width="100px" alt="Candle">
+        </a>
+      </div>
+    </div>
+
+
 
     <div class="columns">
       <div class="column left-column">
