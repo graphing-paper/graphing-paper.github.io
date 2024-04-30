@@ -4,8 +4,7 @@
   <style>
     /* Inline CSS */
     body {
-      cursor: url('candlelit.webp'), auto; /* Custom cursor */
-
+      cursor: none; /* Hide the default cursor */
       background-color: #e0e0e0; /* Page background */
     }
 
@@ -20,13 +19,31 @@
       width: 100px; /* Consistent size */
       margin: 10px; /* Space between images */
     }
+
+    #highlight {
+      position: absolute;
+      width: 150px; /* Larger circle */
+      height: 150px;
+      background: rgba(255, 255, 0, 0.1); /* Translucent yellow circle */
+      border-radius: 50%; /* Make it circular */
+      mix-blend-mode: lighten; /* Blending mode */
+      pointer-events: none; /* Prevent interference */
+    }
+
+    #cursor-candle {
+      position: absolute; /* Make the candle float above the highlight */
+      width: 50px; /* Adjust as needed */
+      height: auto; /* Maintain aspect ratio */
+      pointer-events: none; /* Prevent interference */
+    }
   </style>
 
   <script>
     function toggleCandle(candleId) {
       const candle = document.getElementById(candleId);
+      const candleSrc = candle.src; /* Store original source */
 
-      if (candle.src.includes("candle.png")) {
+      if (candleSrc.includes("candle.png")) {
         candle.src = "candlelit.webp"; // Change to lit candle
 
         setTimeout(() => {
@@ -34,6 +51,32 @@
         }, 60000);
       }
     }
+
+    document.addEventListener("mousemove", function(event) {
+      // Create or update the highlight elements
+      let highlight = document.getElementById("highlight");
+      let cursorCandle = document.getElementById("cursor-candle");
+
+      if (!highlight) {
+        highlight = document.createElement("div");
+        highlight.id = "highlight";
+        document.body.appendChild(highlight);
+      }
+
+      if (!cursorCandle) {
+        cursorCandle = document.createElement("img");
+        cursorCandle.id = "cursor-candle";
+        cursorCandle.src = "candlelit.webp"; // Path to cursor image
+        document.body.appendChild(cursorCandle);
+      }
+
+      // Position both elements based on cursor position
+      highlight.style.left = `${event.pageX - 75}px`;
+      highlight.style.top = `${event.pageY - 75}px`;
+
+      cursorCandle.style.left = `${event.pageX - 25}px`;
+      cursorCandle.style.top = `${event.pageY - 25}px`;
+    });
   </script>
 </head>
 <body>
