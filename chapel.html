@@ -4,155 +4,49 @@
   <style>
     /* Inline CSS */
     body {
-      cursor: none; /* Hide the default cursor */
+      cursor: url('candlelit.webp'), auto; /* Custom cursor */
+
+      background-color: #e0e0e0; /* Page background */
     }
 
     .page {
-      background-color: #e0e0e0;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px; /* Optional padding for spacing */
+      justify-content: center; /* Center content */
+      align-items: center; /* Vertically align content */
+      padding: 20px; /* Optional padding */
     }
 
-    .candle-section {
-      background-color: #e0e0e0;
-      padding: 10px;
-    }
-
-    .center-content {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
-
-    .image-container {
-      margin-bottom: 20px; /* Space between the image and text */
-    }
-
-    .columns {
-      display: flex;
-      justify-content: space-between; /* Distribute columns evenly */
-    }
-
-    .column {
-      width: 30%; /* Each column takes up 30% of the content width */
-    }
-
-    .footer {
-      margin-top: 20px;
-      text-align: center; /* Center-align the footer content */
-    }
-
-    #highlight {
-      position: absolute;
-      width: 150px; /* Larger circle */
-      height: 150px;
-      background: rgba(255, 255, 0, 0.1); /* Lighter yellow circle */
-      border-radius: 50%; /* Make it circular */
-      mix-blend-mode: lighten; /* Blending mode */
-    }
-
-    #cursor-candle {
-      position: absolute; /* Make the candle float above the highlight */
-      width: 50px; /* Adjust as needed */
-      height: auto; /* Maintain aspect ratio */
-      pointer-events: none; /* Prevent interference */
+    .candle, .chapel {
+      width: 100px; /* Consistent size */
+      margin: 10px; /* Space between images */
     }
   </style>
 
   <script>
-    function toggleCandle(side) {
-      const candleId = `candle-${side}`;
+    function toggleCandle(candleId) {
       const candle = document.getElementById(candleId);
-      const page = document.querySelector(`.${side}-candle`);
 
       if (candle.src.includes("candle.png")) {
         candle.src = "candlelit.webp"; // Change to lit candle
-        page.style.backgroundColor = "#f0f0f0"; // Lighten background
 
         setTimeout(() => {
           candle.src = "candle.png"; // Revert after 60 seconds
-          page.style.backgroundColor = "#e0e0e0";
         }, 60000);
-      } else {
-        candle.src = "candle.png";
-        page.style.backgroundColor = "#e0e0e0";
       }
     }
-
-    document.addEventListener("mousemove", function(event) {
-      let highlight = document.getElementById("highlight");
-      let cursorCandle = document.getElementById("cursor-candle");
-
-      if (!highlight) {
-        highlight = document.createElement("div");
-        highlight.id = "highlight";
-        document.body.appendChild(highlight);
-      }
-
-      if (!cursorCandle) {
-        cursorCandle = document.createElement("img");
-        cursorCandle.id = "cursor-candle";
-        cursorCandle.src = "candlelit.webp"; // Path to the cursor image
-        document.body.appendChild(cursorCandle);
-      }
-
-      // Position both elements based on cursor position
-      highlight.style.left = `${event.pageX - 75}px`;
-      highlight.style.top = `${event.pageY - 75}px`;
-
-      cursorCandle.style.left = `${event.pageX - 25}px`;
-      cursorCandle.style.top = `${event.pageY - 25}px`;
-    });
   </script>
 </head>
 <body>
   <div class="page">
-    <div class="center-content">
-      <div class="candle-section left-candle">
-        <a href="#" onclick="toggleCandle('left')">
-          <img id="candle-left" src="candle.png" width="100px" alt="Candle">
-        </a>
-      </div>
+    <a href="#" onclick="toggleCandle('candle-left')">
+      <img id="candle-left" class="candle" src="candle.png" alt="Candle">
+    </a>
 
-      <div class="image-container">
-        <img src="ca.png" alt="Chapel Image" width="100px">
-      </div>
+    <img class="chapel" src="ca.png" alt="Chapel">
 
-      <div class="candle-section right-candle">
-        <a href="#" onclick="toggleCandle('right')">
-          <img id="candle-right" src="candle.png" width="100px" alt="Candle">
-        </a>
-      </div>
-    </div>
-
-
-
-    <div class="columns">
-      <div class="column left-column">
-        <p>I keep you in my heart. May the Lord God protect you. May they remember your heart's desire and trust you with His hand.</p>
-        <p>Glory to the Father, and to the Son, and to the Holy Spirit, forever and ever, world without end.</p>
-        <p>By your will, all things.<br><br>By your kindness, heart<br><br>To you Lord, I make my prayer for mercy.<br><br>To you Lord, I make my prayer for mercy.<br><br>Glory to the Father, and to the Son, and to the Holy Spirit. As it was in the beginning, is now, and ever will be, world without end.</p>
-        <p>Lord, hear our prayers.</p>
-      </div>
-
-      <div class="column right-column">
-        <p>Goodwill - A necessary condition for the peace of the soul.<br>There are two paths. One towards God, and one away from Them. Go towards God. This discomfort...</p>
-        <p>Repent from sin. Let yourself be purified.</p>
-        <p>For forty days and forty nights, Christ wandered the desert. For forty days and forty nights, Christ fought against temptation.</p>
-        <p>I fall. I pray. We are quiet.</p>
-      </div>
-
-      <div class="column third-column">
-        <p>Thank you. Thank you for all you have given me. Thank you for food and shelter, for movement, for art and music. Thank you for love, for trees, and for understanding. Thank you for the people I love: my friends, my family, those in madness and in faith.</p>
-        <p>Whoever she is. Thank you for this love, this hope, this life. Lord, make me an instrument of your Peace. Where there is hatred, let me sow love. Where there is injury, pardon. Where there is doubt, faith. Where there is despair, hope. Oh Divine Master, grant that I may love, that I may console, that I may bring hope and peace in all ways.</p>
-      </div>
-    </div>
-
-    <footer>
-      <a href="index.html">Return to Home</a>
-    </footer>
+    <a href="#" onclick="toggleCandle('candle-right')">
+      <img id="candle-right" class="candle" src="candle.png" alt="Candle">
+    </a>
   </div>
 </body>
 </html>
