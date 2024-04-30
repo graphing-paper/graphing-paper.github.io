@@ -27,7 +27,7 @@
     }
 
     .image-container {
-      margin-bottom: 20px; /* Optional spacing between image and text */
+      margin-bottom: 20px; /* Space between image and text */
     }
 
     .columns {
@@ -51,7 +51,7 @@
       background-color: #c8c8c8;
     }
 
-    footer {
+    .footer {
       margin-top: 20px;
       text-align: center; /* Center-align the footer content */
     }
@@ -63,7 +63,6 @@
       background: rgba(255, 255, 0, 0.05); /* Lighter yellow circle */
       border-radius: 50%; /* Make it circular */
       mix-blend-mode: lighten; /* Lighter blending mode */
-   
     }
 
     #cursor-candle {
@@ -74,7 +73,7 @@
   </style>
 
   <script>
-  function toggleCandle(side) {
+    function toggleCandle(side) {
       const candleId = `candle-${side}`;
       const candle = document.getElementById(candleId);
       const page = document.querySelector(`.${side}-candle`);
@@ -122,7 +121,6 @@
 </head>
 <body>
   <div class="page">
-  <div class="page">
     <div class="center-content">
       <div class="candle-section left-candle">
         <a href="#" onclick="toggleCandle('left')">
@@ -133,15 +131,6 @@
       <div class="image-container">
         <img src="ca.png" alt="Chapel Image" width="100px">
       </div>
-
-    
-
-      <div class="candle-section right-candle">
-        <a href="#" onclick="toggleCandle('right')">
-          <img id="candle-right" src="candle.png" width="100px" alt="Candle">
-        </a>
-      </div>
-    </div>
 
     <div class="columns">
       <div class="column left-column">
