@@ -2,65 +2,77 @@
 <html>
 <head>
   <style>
-    /* styles.css */
-body {
-  cursor: none; /* Hide the default cursor */
-}
+    /* Inline CSS */
+    body {
+      cursor: none; /* Hide the default cursor */
+    }
 
-.page {
-  background-color: #e0e0e0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
+    .page {
+      background-color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px; /* Optional padding for spacing */
+    }
 
-.candle-section {
-  background-color: #e0e0e0;
-  padding: 10px;
-}
+    .candle-section {
+      background-color: #e0e0e0;
+      padding: 10px;
+    }
 
-.center-content {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
+    .center-content {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
 
-.image-container {
-  margin-bottom: 20px; /* Space between image and text */
-}
+    .image-container {
+      margin-bottom: 20px; /* Optional spacing between image and text */
+    }
 
-.columns {
-  display: flex;
-  justify-content: space-between; /* Distribute columns evenly */
-}
+    .columns {
+      display: flex;
+      justify-content: space-between; /* Distribute columns evenly */
+    }
 
-.column {
-  width: 30%; /* Each column takes up 30% of the content width */
-}
+    .column {
+      width: 30%; /* Each column takes up 30% of the content width */
+    }
 
-footer {
-  margin-top: 20px;
-  text-align: center; /* Center-align the footer content */
-}
+    .left-column {
+      background-color: #e8e8e8;
+    }
 
-#highlight {
-  position: absolute;
-  width: 150px; /* Larger circle */
-  height: 150px;
-  background: rgba(255, 255, 0, 0.05); /* Lighter yellow circle */
-  border-radius: 50%; /* Make it circular */
-  mix-blend-mode: lighten; /* Lighter blending mode */
-  pointer-events: none; /* Prevent interference */
-}
+    .right-column {
+      background-color: #dcdcdc;
+    }
 
-#cursor-candle {
-  position: absolute; /* Make the candle float above the highlight */
-  width: 50px; /* Adjust as needed */
-  height: auto; /* Maintain aspect ratio */
-}
+    .third-column {
+      background-color: #c8c8c8;
+    }
 
+    footer {
+      margin-top: 20px;
+      text-align: center; /* Center-align the footer content */
+    }
+
+    #highlight {
+      position: absolute;
+      width: 150px; /* Larger circle */
+      height: 150px;
+      background: rgba(255, 255, 0, 0.05); /* Lighter yellow circle */
+      border-radius: 50%; /* Make it circular */
+      mix-blend-mode: lighten; /* Lighter blending mode */
+      pointer-events: none; /* Prevent interference */
+    }
+
+    #cursor-candle {
+      position: absolute; /* Make the candle float above the highlight */
+      width: 50px; /* Adjust as needed */
+      height: auto; /* Maintain aspect ratio */
+    }
   </style>
+
   <script>
     function toggleCandle(side) {
       const candleId = `candle-${side}`;
@@ -110,39 +122,43 @@ footer {
 </head>
 <body>
   <div class="page">
-    <div class="candle-section left-candle">
-      <a href="#" onclick="toggleCandle('left')">
-        <img id="candle-left" src="candle.png" width="100px" alt="Candle">
-      </a>
-    </div>
-
     <div class="center-content">
-      <div class="image-container">
-        <img src="ca.png" alt="Chapel Image" width="150px">
+      <div class="candle-section left-candle">
+        <a href="#" onclick="toggleCandle('left')">
+          <img id="candle-left" src="candle.png" width="100px" alt="Candle">
+        </a>
       </div>
 
-      <div class="columns">
-        <div class="column left-column">
-          <p>I keep you in my heart. May the Lord God protect you...</p>
-          <p>Glory to the Father, and to the Son, and to the Holy Spirit...</p>
-        </div>
+      <div class="image-container">
+        <img src="ca.png" alt="Chapel Image" width="100px">
+      </div>
 
-        <div class="column right-column">
-          <p>Goodwill - A necessary condition for the peace of the soul...</p>
-          <p>Let your heart be purified and your spirit cleansed...</p>
-        </div>
-
-        <div class="column third-column">
-          <p>Thank you, Lord, for all that you have given me...</p>
-          <p>Make me an instrument of your peace...</p>
-        </div>
+      <div class="candle-section right-candle">
+        <a href="#" onclick="toggleCandle('right')">
+          <img id="candle-right" src="candle.png" width="100px" alt="Candle">
+        </a>
       </div>
     </div>
 
-    <div class="candle-section right-candle">
-      <a href="#" onclick="toggleCandle('right')">
-        <img id="candle-right" src="candle.png" width="100px" alt="Candle">
-      </a>
+    <div class="columns">
+      <div class="column left-column">
+        <p>I keep you in my heart. May the Lord God protect you. May they remember your heart's desire and trust you with His hand.</p>
+        <p>Glory to the Father, and to the Son, and to the Holy Spirit, forever and ever, world without end.</p>
+        <p>By your will, all things.<br><br>By your kindness, heart<br><br>To you Lord, I make my prayer for mercy.<br><br>To you Lord, I make my prayer for mercy.<br><br>Glory to the Father, and to the Son, and to the Holy Spirit. As it was in the beginning, is now, and ever will be, world without end.</p>
+        <p>Lord, hear our prayers.</p>
+      </div>
+
+      <div class="column right-column">
+        <p>Goodwill - A necessary condition for the peace of the soul.<br>There are two paths. One towards God, and one away from Them. Go towards God. This discomfort...</p>
+        <p>Repent from sin. Let yourself be purified.</p>
+        <p>For forty days and forty nights, Christ wandered the desert. For forty days and forty nights, Christ fought against temptation.</p>
+        <p>I fall. I pray. We are quiet.</p>
+      </div>
+
+      <div class="column third-column">
+        <p>Thank you. Thank you for all you have given me. Thank you for food and shelter, for movement, for art and music. Thank you for love, for trees, and for understanding. Thank you for the people I love: my friends, my family, those in madness and in faith.</p>
+        <p>Whoever she is. Thank you for this love, this hope, this life. Lord, make me an instrument of your Peace. Where there is hatred, let me sow love. Where there is injury, pardon. Where there is doubt, faith. Where there is despair, hope. Oh Divine Master, grant that I may love, that I may console, that I may bring hope and peace in all ways.</p>
+      </div>
     </div>
 
     <footer>
