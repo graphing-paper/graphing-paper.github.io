@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+/* styles.css */
+.page {
+  background-color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px; /* Optional padding for spacing */
+}
+
+.candle-section {
+  background-color: #e0e0e0;
+  padding: 10px;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.image-container {
+  margin-bottom: 20px; /* Optional spacing between image and text */
+}
+
+.columns {
+  display: flex;
+  justify-content: space-between; /* Distribute columns evenly */
+}
+
+.column {
+  width: 30%; /* Each column takes up 30% of the content width */
+}
+
+.left-column {
+  background-color: #e8e8e8;
+}
+
+.right-column {
+  background-color: #dcdcdc;
+}
+
+.third-column {
+  background-color: #c8c8c8;
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center; /* Center-align the footer content */
+}
+
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="candle-section left-candle">
+      <a href="#" onclick="toggleCandle('left')">
+        <img width="100px"id="candle-left" src="candle.png" alt="Candle">
+      </a>
+    </div>
+
+    <div class="center-content">
+      <div class="image-container">
+        <img src="chapel.png" alt="Chapel Image">
+      </div>
+
+      <div class="columns">
+        <div class="column left-column">
+          <p>Text 1: Blessed are those who walk in righteousness, for they shall find peace in the light of the Lord.</p>
+          <p>Text 1: Let love and compassion guide your heart, for this is the path to divine grace.</p>
+          <p>Text 1: In every prayer and meditation, seek the eternal truth that resides within.</p>
+          <p>Text 1: In the stillness, listen for the gentle whisper of the Divine.</p>
+        </div>
+
+        <div class="column right-column">
+          <p>Text 2: May your prayers rise like incense before the heavens, bringing you closer to the Divine.</p>
+          <p>Text 2: Seek guidance in the sacred words, and let them illuminate your path.</p>
+          <p>Text 2: In reverence and humility, approach the altar, and surrender your burdens.</p>
+          <p>Text 2: In the sacred silence, find peace for your soul and clarity for your mind.</p>
+        </div>
+
+        <div class="column third-column">
+          <p>Text 3: The light of the Divine shines upon you, guiding your way through the darkness.</p>
+          <p>Text 3: In faith, walk the path of righteousness, trusting in the goodness of the Divine.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="candle-section right-candle">
+      <a href="#" onclick="toggleCandle('right')">
+        <img id="candle-right" width="100px"src="candle.png" alt="Candle">
+      </a>
+    </div>
+
+    <footer>
+      <a href="index.html">Return to Home</a>
+    </footer>
+  </div>
+
+  <script>
+    function toggleCandle(side) {
+      const candleId = `candle-${side}`;
+      const candle = document.getElementById(candleId);
+      const page = document.querySelector(`.${side}-candle`);
+
+      if (candle.src.includes("dark")) {
+        candle.src = "candlelit.gif"; // Change to light candle
+        page.style.backgroundColor = "#f0f0f0"; // Lighten the background color
+
+        setTimeout(() => {
+          candle.src = "candle.png"; // Revert to dark candle after 60 seconds
+          page.style.backgroundColor = "#e0e0e0"; // Revert background color
+        }, 60000);
+      } else {
+        candle.src = "candle.png";
+        page.style.backgroundColor = "#e0e0e0";
+      }
+    }
+  </script>
+</body>
+</html>
