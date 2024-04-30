@@ -58,6 +58,14 @@
   </style>
 
   <script>
+    function playAudio() {
+    // Get the iframe element
+    var iframe = document.getElementById("youtubeAudio");
+
+    // Create a new video player object
+    iframe.src += "?autoplay=1"; // Auto-plays when appended
+}
+    
     function toggleCandle(candleId) {
       const candle = document.getElementById(candleId);
       const candleSrc = candle.src; /* Store original source */
@@ -135,6 +143,11 @@
     </div>
 
     <footer>
+      <button onclick="playAudio()">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnhGKw1iH_UzE_yWfmWOku-_3OwGKDsdT2A6v2tJLzkw&s" alt="Play Audio">
+</button>
+     <iframe id="youtubeAudio" width="0" height="0" src="https://www.youtube.com/watch?v=Ei88J4lERbk" frameborder="0" allow="autoplay"></iframe>
+      
       <a href="index.html">Return to Home</a>
     </footer>
  
