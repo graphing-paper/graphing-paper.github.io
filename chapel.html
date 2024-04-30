@@ -3,6 +3,10 @@
 <head>
   <style>
 /* styles.css */
+
+
+
+
 .page {
   background-color: #e0e0e0;
   display: flex;
@@ -51,8 +55,75 @@ footer {
   margin-top: 20px;
   text-align: center; /* Center-align the footer content */
 }
+body {
+  cursor: none; /* Hide the default cursor */
+}
+
+#highlight {
+  position: absolute;
+  width: 150px; /* Larger circle */
+  height: 150px;
+  background: rgba(255, 255, 0, 0.05); /* Lighter yellow circle */
+  border-radius: 50%; /* Make it circular */
+  mix-blend-mode: lighten; /* Lighter blending mode */
+  pointer-events: none; /* Prevent interference */
+}
+
+#candle {
+  position: absolute; /* Make the candle float above the highlight */
+  width: 50px; /* Adjust as needed */
+  height: auto; /* Maintain aspect ratio */
+}
 
 </style>
+
+<script>
+    function toggleCandle(side) {
+      const candleId = `candle-${side}`;
+      const candle = document.getElementById(candleId);
+      const page = document.querySelector(`.${side}-candle`);
+
+      if (candle.src.includes("dark")) {
+        candle.src = "candlelit.gif"; // Change to light candle
+        page.style.backgroundColor = "#f0f0f0"; // Lighten the background color
+
+        setTimeout(() => {
+          candle.src = "candle.png"; // Revert to dark candle after 60 seconds
+          page.style.backgroundColor = "#e0e0e0"; // Revert background color
+        }, 60000);
+      } else {
+        candle.src = "candle.png";
+        page.style.backgroundColor = "#e0e0e0";
+      }
+    }
+
+ document.addEventListener("mousemove", function(event) {
+      // Create or update the highlight elements
+      let highlight = document.getElementById("highlight");
+      let candle = document.getElementById("candle");
+
+      if (!highlight) {
+        highlight = document.createElement("div");
+        highlight.id = "highlight";
+        document.body.appendChild(highlight);
+      }
+
+      if (!candle) {
+        candle = document.createElement("img");
+        candle.id = "candle";
+        candle.src = "candle.gif"; // Specify the path to the candle GIF
+        document.body.appendChild(candle);
+      }
+
+      // Position the highlight and candle elements based on the cursor position
+      highlight.style.left = `${event.pageX - 75}px`; // Center the highlight
+      highlight.style.top = `${event.pageY - 75}px`;
+
+      candle.style.left = `${event.pageX - 25}px`; // Position candle in the center of the highlight
+      candle.style.top = `${event.pageY - 25}px`;
+    });
+  </script>
+
 </head>
 <body>
   <div class="page">
@@ -116,25 +187,6 @@ footer {
     </footer>
   </div>
 
-  <script>
-    function toggleCandle(side) {
-      const candleId = `candle-${side}`;
-      const candle = document.getElementById(candleId);
-      const page = document.querySelector(`.${side}-candle`);
-
-      if (candle.src.includes("dark")) {
-        candle.src = "candlelit.gif"; // Change to light candle
-        page.style.backgroundColor = "#f0f0f0"; // Lighten the background color
-
-        setTimeout(() => {
-          candle.src = "candle.png"; // Revert to dark candle after 60 seconds
-          page.style.backgroundColor = "#e0e0e0"; // Revert background color
-        }, 60000);
-      } else {
-        candle.src = "candle.png";
-        page.style.backgroundColor = "#e0e0e0";
-      }
-    }
-  </script>
+  
 </body>
 </html>
